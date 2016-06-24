@@ -53,32 +53,6 @@ def optht(beta, sv=None, sigma=None, trace=True):
     --------
 
 
-    
-    % Usage in known noise level:
-    %
-    %   Given an m-by-n matrix Y known to be low rank and observed in white noise 
-    %   with mean zero and known variance sigma^2, form a denoised matrix Xhat by:
-    %
-    %   [U D V] = svd(Y);
-    %   y = diag(Y);
-    %   y( y < (optimal_SVHT_coef(m/n,1) * sqrt(n) * sigma) ) = 0;
-    %   Xhat = U * diag(y) * V';
-    % 
-    %
-    % Usage in unknown noise level:
-    %
-    %   Given an m-by-n matrix Y known to be low rank and observed in white
-    %   noise with mean zero and unknown variance, form a denoised matrix 
-    %   Xhat by:
-    %  
-    %   [U D V] = svd(Y); 
-    %   y = diag(Y); 
-    %   y( y < (optimal_SVHT_coef_sigma_unknown(m/n,0) * median(y)) ) = 0; 
-    %   Xhat = U * diag(y) * V';
-    % 
-    % -----------------------------------------------------------------------------
-
-
     """
 
     #*************************************************************************
@@ -108,7 +82,9 @@ def optht(beta, sv=None, sigma=None, trace=True):
         if trace==True: print('*************')
 
         coef = optimal_SVHT_coef_sigma_unknown(beta)
-        if trace==True: print('approximated coefficent w(beta): ', coef) 
+        if trace==True: print('approximated coefficent w(beta): ', coef)
+            
+            
         coef = optimal_SVHT_coef_sigma_known(beta) / np.sqrt(MedianMarcenkoPastur(beta))
         if trace==True: print('optimal coefficent w(beta): ', coef) 
 
