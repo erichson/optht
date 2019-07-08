@@ -1,6 +1,6 @@
 from __future__ import division
 import numpy as np
-import scipy as sci
+import scipy.integrate as si
 from numpy.testing import assert_raises
 
 
@@ -149,8 +149,8 @@ def MedianMarcenkoPastur(beta):
         change = 0
         x = np.linspace(lobnd, hibnd, 10)
         y = np.zeros_like(x)
-        for i in xrange(len(x)):
-            yi, err = sci.integrate.quad(MarPas, a=x[i], b=topSpec, args=(topSpec, botSpec, beta))
+        for i in range(len(x)):
+            yi, err = si.quad(MarPas, a=x[i], b=topSpec, args=(topSpec, botSpec, beta))
             y[i] = 1-yi
 
         if np.any( y < 0.5 ):
