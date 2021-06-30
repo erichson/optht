@@ -4,7 +4,7 @@ Optimal Hard Threshold for Matrix Denoising
 Off-the-shelf method for determining the optimal singular value truncation
 (hard threshold) for matrix denoising.    
     
-The method gives the optimal location both in the case of the konwn or unknown noise level.
+The method gives the optimal location both in the case of the known or unknown noise level.
 
 
 
@@ -22,7 +22,8 @@ Create some data:
 ```Python
 import numpy as np
 import scipy as sci
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+from optht import optht
 
 t = np.arange(-2,2, 0.01)
 
@@ -42,13 +43,13 @@ X_noisy = X + sigma * np.random.standard_normal(X.shape)
 Compute the singular value decompositionn (SVD):
 
 ```Python
-U,s,Vh = np.linalg.svd(X_noisy, full_matrices=False)
+U, s, Vh = np.linalg.svd(X_noisy, full_matrices=False)
 ```
 
 Determine optimal hard threshold and reconstruct image
 ```Python
 k = optht(X_noisy, sv=s, sigma=None)
-X_denoised = (U[:, xrange(k)] * s[xrange(k)] ).dot( Vh[xrange(k),:])
+X_denoised = (U[:, range(k)] * s[range(k)]).dot(Vh[range(k),:])
 ```
 
 Plot the results:
@@ -56,20 +57,21 @@ Plot the results:
 ```Python
 
 plt.subplot(131)
-plt.imshow(X, cmap = 'gray', interpolation = 'bicubic')
-plt.title('Original image', fontsize=30)
+plt.imshow(X, cmap='gray', interpolation='bicubic')
+plt.title('Original image')
 plt.axis('off')
 
 plt.subplot(132)
-plt.imshow(X_noisy, cmap = 'gray', interpolation = 'bicubic')
-plt.title('Noisy image, sigma=%s'%sigma, fontsize=30)
+plt.imshow(X_noisy, cmap='gray', interpolation='bicubic')
+plt.title('Noisy image, sigma=%s' % sigma)
 plt.axis('off')
 
 plt.subplot(133)
-plt.imshow(X_denoised, cmap = 'gray', interpolation = 'bicubic')
-rmseSVD = np.sqrt(np.sum( ( X - X_denoised )**2 ) /  np.sum(X**2))
-plt.title('Denoised image,  nrmse=%s '%np.round(rmseSVD,2), fontsize=30)
+plt.imshow(X_denoised, cmap='gray', interpolation='bicubic')
+rmseSVD = np.sqrt(np.sum( ( X - X_denoised )**2 ) / np.sum(X**2))
+plt.title('Denoised image,  nrmse=%s ' % np.round(rmseSVD, 2))
 plt.axis('off')
+plt.show()
 
 ```
 
@@ -79,11 +81,12 @@ Plot the singular value spectrum:
 
 plt.plot( (np.arange(1,s.shape[0]+1)), np.log(s), c='b', marker='o', linestyle='--')
 plt.xlabel('k', fontsize=25)
-plt.ylabel('Log-scaled singular values', fontsize=25)
-plt.tick_params(axis='x', labelsize=25) 
-plt.tick_params(axis='y', labelsize=25) 
-plt.title('Singular value spectrum', fontsize=30)
+plt.ylabel('Log-scaled singular values')
+plt.tick_params(axis='x') 
+plt.tick_params(axis='y') 
+plt.title('Singular value spectrum')
 plt.axvline(k, c='r', linewidth=2, linestyle='--')
+plt.show()
 
 ```
 
