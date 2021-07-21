@@ -8,9 +8,9 @@ setuptools.setup(
     version='0.2.0',
     description='Optimal hard threshold for matrix denoising',
     long_description=readme,
-    author='N. Benjamin Erichson',
-    author_email='erichson@berkeley.edu',
-    url='https://github.com/decarsg/optht',
+    author='N. Benjamin Erichson, Steven Dahdah',
+    author_email='erichson@berkeley.edu, Steven.Dahdah@mail.mcgill.ca',
+    url='https://github.com/erichson/optht',
     packages=setuptools.find_packages(exclude=('tests', 'examples')),
     install_requires=['numpy', 'scipy'],
 )
