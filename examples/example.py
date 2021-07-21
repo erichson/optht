@@ -4,6 +4,9 @@ from matplotlib import pyplot as plt
 import numpy as np
 from scipy import linalg
 from optht import optht
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 # Create some data
 t = np.arange(-2, 2, 0.01)
