@@ -94,6 +94,8 @@ plt.show()
 Notes
 *****
 Code is adapted from Matan Gavish and David Donoho, see [1].
+
+MATLAB code: https://purl.stanford.edu/vg705qn9070
        
 References
 **********
