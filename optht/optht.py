@@ -9,7 +9,7 @@ from scipy import integrate
 log = logging.getLogger(__name__)
 
 
-def optht(beta, sv=None, sigma=None):
+def optht(beta, sv, sigma=None):
     """Compute optimal hard threshold for singular values.
 
     Off-the-shelf method for determining the optimal singular value truncation
@@ -21,10 +21,9 @@ def optht(beta, sv=None, sigma=None):
     Parameters
     ----------
     beta : scalar or array_like
-        Scalar determining the aspect ratio of a matrix, i.e., `beta = m/n',
-        where `m >= n'.
-        Instead the input matrix can be provided and the aspect ratio is
-        determined automatically.
+        Scalar determining the aspect ratio of a matrix, i.e., ``beta = m/n``,
+        where ``m >= n``.  Instead the input matrix can be provided and the
+        aspect ratio is determined automatically.
 
     sv : array_like
         The singular values for the given input matrix.
@@ -54,44 +53,35 @@ def optht(beta, sv=None, sigma=None):
         n = max(beta.shape)
         beta = m / n
 
+    # Check ``beta``
     if beta < 0 or beta > 1:
-        raise ValueError('beta must be in (0,1].')
+        raise ValueError('Parameter `beta` must be in (0,1].')
 
     if sigma is None:
-        # Sigma unknown
+        # Sigma is unknown
         log.info('Sigma unknown.')
-
-        coef = _optimal_SVHT_coef_sigma_unknown(beta)
-        log.info(f'Approximated coefficient w(beta): {coef}')
-
+        # Approximate ``w(beta)``
+        coef_approx = _optimal_SVHT_coef_sigma_unknown(beta)
+        log.info(f'Approximated `w(beta)` value: {coef_approx}')
+        # Compute the optimal ``w(beta)``
         coef = (_optimal_SVHT_coef_sigma_known(beta)
-                / np.sqrt(_MedianMarcenkoPastur(beta)))
-        log.info(f'Optimal coefficient w(beta): {coef}')
-
-        if sv is not None:
-            # Compute cutoff
-            cutoff = coef * np.median(sv)
-            log.info(f'Cutoff value: {cutoff}')
-            # Compute rank
-            k = np.max(np.where(sv > cutoff)) + 1
-            log.info(f'Target rank: {k}')
-            return k
+                / np.sqrt(_median_marcenko_pastur(beta)))
+        # Compute cutoff
+        cutoff = coef * np.median(sv)
     else:
-        # Sigma known
+        # Sigma is known
         log.info('Sigma known.')
-
+        # Compute optimal ``w(beta)``
         coef = _optimal_SVHT_coef_sigma_known(beta)
-        log.info(f'w(beta) value: {coef}')
-
-        if sv is not None:
-            # Compute cutoff
-            cutoff = coef * np.sqrt(len(sv)) * sigma
-            log.info('Cutoff value: {cutoff}')
-            # Compute rank
-            k = np.max(np.where(sv > cutoff)) + 1
-            log.info('Target rank: {k}')
-            return k
-    return coef
+        # Compute cutoff
+        cutoff = coef * np.sqrt(len(sv)) * sigma
+    # Log cutoff and ``w(beta)``
+    log.info(f'`w(beta)` value: {coef}')
+    log.info('Cutoff value: {cutoff}')
+    # Compute and return rank
+    k = np.max(np.where(sv > cutoff)) + 1
+    log.info(f'Target rank: {k}')
+    return k
 
 
 def _optimal_SVHT_coef_sigma_known(beta):
@@ -105,7 +95,7 @@ def _optimal_SVHT_coef_sigma_unknown(beta):
     return 0.56 * beta**3 - 0.95 * beta**2 + 1.82 * beta + 1.43
 
 
-def _MarPas(x, topSpec, botSpec, beta):
+def _mar_pas(x, topSpec, botSpec, beta):
     """Implement Marcenko-Pastur distribution."""
     if (topSpec - x) * (x - botSpec) > 0:
         return np.sqrt((topSpec - x) *
@@ -114,9 +104,8 @@ def _MarPas(x, topSpec, botSpec, beta):
         return 0
 
 
-def _MedianMarcenkoPastur(beta):
+def _median_marcenko_pastur(beta):
     """Compute median of Marcenko-Pastur distribution."""
-
     botSpec = lobnd = (1 - np.sqrt(beta))**2
     topSpec = hibnd = (1 + np.sqrt(beta))**2
     change = 1
@@ -127,7 +116,7 @@ def _MedianMarcenkoPastur(beta):
         y = np.zeros_like(x)
         for i in range(len(x)):
             yi, err = integrate.quad(
-                _MarPas,
+                _mar_pas,
                 a=x[i],
                 b=topSpec,
                 args=(topSpec, botSpec, beta),
