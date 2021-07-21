@@ -83,6 +83,14 @@ plt.axvline(k, c='r', linewidth=2, linestyle='--')
 plt.show()
 ```
 
+Authors & Acknowledgments
+*****
+
+* Thanks to Steven Dahdah for refactoring the code into a Python package.
+* Thanks to Bill Tubbs for style edits and a few typo corrections.
+* Thanks to  @nish-ant for adding fixes to make the code Python 3 compatible.
+
+
 Notes
 *****
 Code is adapted from Matan Gavish and David L. Donoho, see [1].
