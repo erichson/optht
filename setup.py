@@ -17,7 +17,7 @@ setuptools.setup(
     },
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: BSD 3 License",
         "Operating System :: OS Independent",
     ],
     packages=setuptools.find_packages(exclude=('tests', 'examples')),
