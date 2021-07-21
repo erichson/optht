@@ -93,11 +93,11 @@ Authors & Acknowledgments
 
 Notes
 *****
-Code is adapted from Matan Gavish and David L. Donoho, see [1].
+* Code is adapted from Matan Gavish and David L. Donoho, see [1].
 Corresponding MATLAB code can be found
 [here](https://purl.stanford.edu/vg705qn9070)
 
-Original Python implementation written by N. Benjamin Erichson.
+* Original Python implementation written by N. Benjamin Erichson.
 Forked and refactored into a Python package by Steven Dahdah.
 
 References
