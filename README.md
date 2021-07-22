@@ -90,13 +90,13 @@ plt.show()
 
 ## Notes
 
-* Code is adapted from Matan Gavish and David L. Donoho, see [^1].
+* Code is adapted from Matan Gavish and David L. Donoho, see [1].
 Corresponding MATLAB code can be found
 [here](https://purl.stanford.edu/vg705qn9070)
 
 ## References
 
-[^1] Gavish, Matan, and David L. Donoho.
+[1] Gavish, Matan, and David L. Donoho.
 "The optimal hard threshold for singular values is 4/sqrt(3)"
 IEEE Transactions on Information Theory 60.8 (2014): 5040-5053.
 http://arxiv.org/abs/1305.5870
