@@ -79,7 +79,11 @@ def optht(beta, sv, sigma=None):
     log.info(f'`w(beta)` value: {coef}')
     log.info('Cutoff value: {cutoff}')
     # Compute and return rank
-    k = np.max(np.where(sv > cutoff)) + 1
+    greater_than_cutoff = np.where(sv > cutoff)
+    if greater_than_cutoff[0].size > 0:
+        k = np.max(greater_than_cutoff) + 1
+    else:
+        k = 0
     log.info(f'Target rank: {k}')
     return k
 

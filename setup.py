@@ -9,8 +9,8 @@ setuptools.setup(
     description='Optimal hard threshold for matrix denoising',
     long_description=readme,
     long_description_content_type="text/markdown",
-    author='N. Benjamin Erichson, Steven Dahdah',
-    author_email='erichson@berkeley.edu, Steven.Dahdah@mail.mcgill.ca',
+    author=('N. Benjamin Erichson', 'Steven Dahdah'),
+    author_email=('erichson@berkeley.edu', 'steven.dahdah@mail.mcgill.ca'),
     url='https://github.com/erichson/optht',
     project_urls={
         "Bug Tracker": "https://github.com/erichson/optht/issues",

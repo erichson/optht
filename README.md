@@ -1,5 +1,4 @@
-Optimal Hard Threshold for Matrix Denoising
-*******************************************
+# Optimal Hard Threshold for Matrix Denoising
 
 Off-the-shelf method for determining the optimal singular value truncation
 (hard threshold) for matrix denoising.
@@ -7,13 +6,12 @@ Off-the-shelf method for determining the optimal singular value truncation
 The method gives the optimal location both in the case of the known or unknown
 noise level.
 
-Example
-*******
+## Example
+
 ![example](https://raw.githubusercontent.com/Benli11/data/master/img/optHT2.png)
 ![example2](https://raw.githubusercontent.com/Benli11/data/master/img/optHT3.png)
 
-Reproduce the example
-*********************
+## Reproduce the example
 
 Create some data:
 
@@ -83,22 +81,21 @@ plt.axvline(k, c='r', linewidth=2, linestyle='--')
 plt.show()
 ```
 
-Authors & Acknowledgments
-*****
+## Authors & Acknowledgments
 
 * Thanks to Steven Dahdah for refactoring the code into a Python package.
 * Thanks to Bill Tubbs for style edits and a few typo corrections.
 * Thanks to  @nish-ant for adding fixes to make the code Python 3 compatible.
 
 
-Notes
-*****
+## Notes
+
 * Code is adapted from Matan Gavish and David L. Donoho, see [1].
 Corresponding MATLAB code can be found
 [here](https://purl.stanford.edu/vg705qn9070)
 
-References
-**********
+## References
+
 [1] Gavish, Matan, and David L. Donoho.
 "The optimal hard threshold for singular values is 4/sqrt(3)"
 IEEE Transactions on Information Theory 60.8 (2014): 5040-5053.
