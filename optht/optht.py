@@ -77,7 +77,7 @@ def optht(beta, sv, sigma=None):
         cutoff = coef * np.sqrt(len(sv)) * sigma
     # Log cutoff and ``w(beta)``
     log.info(f'`w(beta)` value: {coef}')
-    log.info('Cutoff value: {cutoff}')
+    log.info(f'Cutoff value: {cutoff}')
     # Compute and return rank
     greater_than_cutoff = np.where(sv > cutoff)
     if greater_than_cutoff[0].size > 0:
